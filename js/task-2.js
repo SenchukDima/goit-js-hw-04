@@ -3,24 +3,30 @@
 const inventory = {
   items: ['Монорельса', 'Фильтр'],
   add(itemName) {
-    inventory.items.push(itemName);
+    console.log(`Adding ${itemName} to inventory`);
+
+    this.items.push(itemName);
   },
   remove(itemName) {
-    inventory.items = inventory.items.filter(item => item !== itemName);
+    console.log(`Removing ${itemName} from inventory`);
+
+    this.items = this.items.filter(item => item !== itemName);
   },
 };
 
-const invokeInventoryOperation = function(itemName, inventoryAction) {
-  console.log(`Invoking ${inventoryAction.name} opeartion on ${itemName}`);
-  inventoryAction(itemName);
+const invokeInventoryAction = function(itemName, action) {
+  console.log(`Invoking action on ${itemName}`);
+  action(itemName);
 };
 
-invokeInventoryOperation('Аптечка', inventory.add);
-// Invoking add opeartion on Аптечка
+invokeInventoryAction( 'Аптечка', inventory.add.bind(inventory));
+// Invoking action on Аптечка
+// Adding Аптечка to inventory
 
 console.log(inventory.items); // ['Монорельса', 'Фильтр', 'Аптечка']
 
-invokeInventoryOperation('Фильтр', inventory.remove);
-// Invoking remove opeartion on Фильтр
+invokeInventoryAction('Фильтр', inventory.remove.bind(inventory));
+// Invoking action on Фильтр
+// Removing Фильтр from inventory
 
 console.log(inventory.items); // ['Монорельса', 'Аптечка']
