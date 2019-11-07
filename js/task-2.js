@@ -9,8 +9,8 @@ const inventory = {
         },
   remove(itemName) {
     console.log(`Removing ${itemName} from inventory`);
-
-    this.items = this.items.filter(item => item !== itemName);
+    const context = inventory;
+    context.items = context.items.filter(item => item !== itemName);
   },
 };
 
@@ -26,9 +26,9 @@ invokeInventoryAction('Аптечка', inventory.add);
 
 console.log(inventory.items); // ['Монорельса', 'Фильтр', 'Аптечка']
 
-// invokeInventoryAction('Фильтр', inventory.remove);
+invokeInventoryAction('Фильтр', inventory.remove);
 // // Invoking action on Фильтр
 // // Removing Фильтр from inventory
 
-// console.log(inventory.items); // ['Монорельса', 'Аптечка']
+console.log(inventory.items); // ['Монорельса', 'Аптечка']
 
